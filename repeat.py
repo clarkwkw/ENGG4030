@@ -22,14 +22,12 @@ def get_job_cmd(nmapper, nreducer):
 
 	if nmapper is not None:
 		cmd.extend([
-			"-D",
-			"mapred.map.task=%d"%nmapper
+			"-D", "mapred.map.tasks=%d"%nmapper
 		])
 
 	if nreducer is not None:
 		cmd.extend([
-			"-D",
-			"mapred.reduce.task=%d"%nreducer
+			"-D", "mapred.reduce.tasks=%d"%nreducer
 		])
 
 	mapper_name = basename(MAPPER_DIR)
