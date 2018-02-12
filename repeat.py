@@ -7,11 +7,11 @@ import sys
 
 # Place under hadoop root directory
 
-HD_INPUT_DIR = "/medium_stage_1_output"
-HD_OUTPUT_DIR = "/medium_stage_2_output"
+HD_INPUT_DIR = "/Medium.txt"
+HD_OUTPUT_DIR = "/medium_output"
 LOG_NAME = "trial_%d.txt"
-MAPPER_DIR = "/home/clarkwkw/ENGG4030/hw1/stage2_mapper.py"
-REDUCER_DIR = "/home/clarkwkw/ENGG4030/hw1/stage2_reducer.py"
+MAPPER_DIR = "/home/clarkwkw/ENGG4030/hw1/mapper.py"
+REDUCER_DIR = "/home/clarkwkw/ENGG4030/hw1/reducer.py"
 
 def get_job_cmd(nmapper, nreducer):
 	cmd = [
