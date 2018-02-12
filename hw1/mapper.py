@@ -2,7 +2,7 @@
 from __future__ import print_function
 import sys
 
-QUICKMODE = True
+QUICKMODE = False
 SID_SUFFIX = "63461"
 
 def get_line(file):
