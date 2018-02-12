@@ -23,7 +23,7 @@ def map():
 						print("%s\t%s\t%s"%(followers[j], followers[i], followee))
 				else:
 					print("%s\t%s\t%s"%(followers[i], followers[j], followee))
-					print("%s\t%s\t%s"%(followers[i], followers[j], followee))
+					print("%s\t%s\t%s"%(followers[j], followers[i], followee))
 					
 if __name__ == "__main__":
 	map()
