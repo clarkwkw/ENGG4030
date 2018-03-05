@@ -12,5 +12,6 @@ prev_pair = None
 for line in get_line(sys.stdin):
 	pair, _ = line.split("\t")
 	if prev_pair != pair and prev_pair is not None:
-		print("%s\t%s"%prev_pair.split("-"))
+		item1, item2 = prev_pair.split("-")
+		print("%s\t%s"%(item1, item2))
 	prev_pair = pair

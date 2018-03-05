@@ -20,8 +20,8 @@ for line in get_line(sys.stdin):
 	unique_items = list({word: True for word in line.split()}.keys())
 	n_baskets += 1
 	for i in range(len(unique_items)):
-		for j in range(i + 1, len(unique_items))
-			pair = "%s-%s"%sorted((unique_items[i], unique_items[j]))
+		for j in range(i + 1, len(unique_items)):
+			pair = "%s-%s"%tuple(sorted((unique_items[i], unique_items[j])))
 			if pair in candidate_pairs:
 				candidate_pairs[pair] += 1
 

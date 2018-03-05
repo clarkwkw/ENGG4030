@@ -17,13 +17,13 @@ for line in get_line(sys.stdin):
 	if pair != prev_pair and prev_pair is not None:
 		if 1.0*occurence/n_baskets >= THRESHOLD:
 			item1, item2 = prev_pair.split("-")
-			print("%s, %s: %d"%(item1, item2, occurence))
+			print("%s,%s: %d"%(item1, item2, occurence))
 		occurence = 0
 		n_baskets = 0
 		
 	prev_pair = pair
-	occurence += count
-	n_baskets += sub_baskets
+	occurence += int(count)
+	n_baskets += int(sub_baskets)
 
 if 1.0*occurence/n_baskets >= THRESHOLD:
 	item1, item2 = prev_pair.split("-")
