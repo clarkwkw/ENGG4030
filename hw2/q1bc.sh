@@ -30,4 +30,4 @@ rm -rf ~/ENGG4030/hw2/candidates.txt ~/ENGG4030/hw2/mr_output.txt
 
 ./bin/hdfs dfs -copyToLocal /hw2_q1b_job2/part-00000 ~/ENGG4030/hw2/mr_output.txt
 
-cat ~/ENGG4030/hw2/mr_output.txt | sort -nrk 2 > ~/ENGG4030/hw2/mr_output.txt
+cat ~/ENGG4030/hw2/mr_output.txt | sort -nrk 2 > ~/ENGG4030/hw2/mr_output_sorted.txt
