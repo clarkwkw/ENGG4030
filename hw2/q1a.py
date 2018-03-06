@@ -68,7 +68,7 @@ def solve(dataset):
 	print("Frequent pairs:")
 	for i in range(min(len(freq_pairs), MAX_RESULT)):
 		pair, occurence = freq_pairs[i]
-		print("%s: %d"%(",".join(pair), occurence))
+		print("%s\t%d"%(",".join(pair), occurence))
 
 if __name__ == "__main__":
 	solve(parse_args())
