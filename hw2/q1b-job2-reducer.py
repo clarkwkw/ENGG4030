@@ -1,23 +1,19 @@
 #!/usr/bin/python
 from __future__ import print_function
-import sys
-
-THRESHOLD = 0.005
-
-def get_line(file):
-	for line in file:
-		line = line.strip()
-		yield line
+import utils
 
 prev_pair = None
 occurence = 0
 n_baskets = 0
-for line in get_line(sys.stdin):
+
+args = utils.parse_args()
+THRESHOLD, N_ITEM = args.threshold, args.n_item
+
+for line in utils.get_line():
 	pair, count, sub_baskets = line.split("\t")
 	if pair != prev_pair and prev_pair is not None:
 		if 1.0*occurence/n_baskets >= THRESHOLD:
-			item1, item2 = prev_pair.split("-")
-			print("%s,%s: %d"%(item1, item2, occurence))
+			print("%s: %d"%(prev_pair.replace("-", ","), occurence))
 		occurence = 0
 		n_baskets = 0
 		
@@ -26,5 +22,4 @@ for line in get_line(sys.stdin):
 	n_baskets += int(sub_baskets)
 
 if 1.0*occurence/n_baskets >= THRESHOLD:
-	item1, item2 = prev_pair.split("-")
-	print("%s,%s: %d"%(item1, item2, occurence))
+	print("%s: %d"%(prev_pair.replace("-", ","), occurence))
