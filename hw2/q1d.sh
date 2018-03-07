@@ -1,6 +1,11 @@
 THRESHOLD=$1
 N_ITEM=$2
 
+if [ "$#" -ne 2 ]; then
+	echo "usage: sh q1d.sh [threshold] [n_item]"
+	exit 1
+fi
+
 rm -rf ~/ENGG4030/hw2/candidates.txt ~/ENGG4030/hw2/mr_output.txt
 
 ./bin/hdfs dfs -rmr -skipTrash /hw2_q1b_job1 /hw2_q1b_job2
