@@ -20,7 +20,7 @@ THRESHOLD, N_ITEM = args.threshold, args.n_item
 
 for line in utils.get_line():
 	n_baskets += 1
-	unique_words = sorted({word: True for word in line.split()}.keys())
+	unique_words = {word: True for word in line.split()}.keys()
 	for word in unique_words:
 		items[word] = items.get(word, 0) + 1
 
