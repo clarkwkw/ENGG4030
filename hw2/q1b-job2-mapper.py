@@ -24,7 +24,7 @@ for line in utils.get_line():
 	for t in utils.enumerate_recursive(unique_items, N_ITEM):
 		is_freq = True
 		for item in t:
-			if t not in freq_items:
+			if item not in freq_items:
 				is_freq = False
 				break
 		if is_freq:
