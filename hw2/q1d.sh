@@ -18,7 +18,7 @@ rm -rf ~/ENGG4030/hw2/candidates.txt ~/ENGG4030/hw2/mr_output.txt
 ./bin/hdfs dfs -copyToLocal /hw2_q1b_job1/part-00000 ~/ENGG4030/hw2/candidates.txt
 
 ./bin/hadoop jar ./share/hadoop/tools/lib/hadoop-streaming-2.7.5.jar \
--file ~/ENGG4030/hw2/q1b-job2-mapper.py \
+-file ~/ENGG4030/hw2/q1d-job2-mapper.py \
 -file ~/ENGG4030/hw2/q1b-job2-reducer.py \
 -file ~/ENGG4030/hw2/utils.py \
 -file ~/ENGG4030/hw2/candidates.txt \
