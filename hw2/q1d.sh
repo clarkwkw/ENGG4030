@@ -22,7 +22,7 @@ rm -rf ~/ENGG4030/hw2/candidates.txt ~/ENGG4030/hw2/mr_output.txt
 -file ~/ENGG4030/hw2/q1b-job2-reducer.py \
 -file ~/ENGG4030/hw2/utils.py \
 -file ~/ENGG4030/hw2/candidates.txt \
--mapper "q1b-job2-mapper.py $THRESHOLD $N_ITEM" \
+-mapper "q1d-job2-mapper.py $THRESHOLD $N_ITEM" \
 -reducer "q1b-job2-reducer.py $THRESHOLD $N_ITEM" \
 -input /shakespeare-basket1.txt \
 -input /shakespeare-basket2.txt \
