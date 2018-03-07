@@ -21,7 +21,8 @@ for line in utils.get_line():
 	n_baskets += 1
 	for t in utils.enumerate_recursive(unique_items, N_ITEM):
 		t = "-".join(t)
-		candidate_pairs[t] += 1
+		if t in candidate_pairs:
+			candidate_pairs[t] += 1
 
 for pair, count in candidate_pairs.items():
 	print("%s\t%d\t%d"%(pair, count, n_baskets))
