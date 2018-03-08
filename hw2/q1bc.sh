@@ -1,3 +1,11 @@
+THRESHOLD=$1
+N_ITEM=$2
+
+if [ "$#" -ne 2 ]; then
+	echo "usage: sh q1bc.sh [threshold] [n_item]"
+	exit 1
+fi
+
 rm -rf ~/ENGG4030/hw2/candidates.txt ~/ENGG4030/hw2/mr_output.txt
 
 ./bin/hdfs dfs -rmr -skipTrash /hw2_q1b_job1 /hw2_q1b_job2
@@ -6,8 +14,8 @@ rm -rf ~/ENGG4030/hw2/candidates.txt ~/ENGG4030/hw2/mr_output.txt
 -file ~/ENGG4030/hw2/q1b-job1-mapper.py \
 -file ~/ENGG4030/hw2/q1b-job1-reducer.py \
 -file ~/ENGG4030/hw2/utils.py \
--mapper "q1b-job1-mapper.py 0.0025 1" \
--reducer "q1b-job1-reducer.py 0.0025 1" \
+-mapper "q1b-job1-mapper.py $THRESHOLD 1" \
+-reducer "q1b-job1-reducer.py $THRESHOLD 1" \
 -input /shakespeare-basket1.txt \
 -input /shakespeare-basket2.txt \
 -output /hw2_q1b_job1
@@ -19,8 +27,8 @@ rm -rf ~/ENGG4030/hw2/candidates.txt ~/ENGG4030/hw2/mr_output.txt
 -file ~/ENGG4030/hw2/q1b-job2-reducer.py \
 -file ~/ENGG4030/hw2/utils.py \
 -file ~/ENGG4030/hw2/candidates.txt \
--mapper "q1b-job2-mapper.py 0.0025 3" \
--reducer "q1b-job2-reducer.py 0.0025 3" \
+-mapper "q1b-job2-mapper.py $THRESHOLD $N_ITEM" \
+-reducer "q1b-job2-reducer.py $THRESHOLD $N_ITEM" \
 -input /shakespeare-basket1.txt \
 -input /shakespeare-basket2.txt \
 -output /hw2_q1b_job2
