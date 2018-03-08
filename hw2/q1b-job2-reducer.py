@@ -23,5 +23,5 @@ for line in utils.get_line():
 	occurence += int(count)
 	n_baskets += int(sub_baskets)
 
-if n_baskets >= 0 and 1.0*occurence/n_baskets >= THRESHOLD:
+if 1.0*occurence/n_baskets >= THRESHOLD:
 	print("%s\t%d"%(prev_pair.replace("-", ","), occurence))
