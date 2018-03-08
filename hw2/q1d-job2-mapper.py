@@ -18,8 +18,7 @@ with open(CANDIDATE_FILE, "r") as f:
 		items = line.strip().split("\t")
 		for item in items:
 			candidate_items[item] = 0
-		if len(items) > 0:
-			candidate_pairs["-".join(items)] = 0
+		candidate_pairs["-".join(items)] = 0
 
 for line in utils.get_line():
 	unique_items = sorted(list({word: True for word in line.split() if word in candidate_items}.keys()))
