@@ -37,7 +37,13 @@ def solve(dataset):
 		for line in f:
 			unique_terms = sorted(list({term: True for term in line.strip().split(" ")}.keys()))
 			for pair in utils.enumerate_recursive(unique_terms, 2):
-				pair_count[tuple(pair)] = pair_count.get(tuple(pair), 0) + 1
+				is_freq = True
+				for item in pair:
+					if item not in term_freq:
+						is_freq = False
+						break
+				if is_freq:
+					pair_count[tuple(pair)] = pair_count.get(tuple(pair), 0) + 1
 
 		f.close()
 
