@@ -27,7 +27,6 @@ def solve(dataset):
 		f.close()
 
 	for term, occurence in term_count.items():
-		max_freq = max(max_freq, occurence)
 		if 1.0*occurence/n_baskets >= THRESHOLD:
 			term_freq[term] = 1
 
