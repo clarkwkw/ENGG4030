@@ -9,6 +9,14 @@ def initial_clusters(imgs, k = 10):
 		clusters[i, :] = imgs[chosen_idx[i], :]
 	return clusters
 
+def split_list(l, n_split):
+	random.shuffle(l)
+	prev_ptr = 0
+	for i in range(n_split):
+		n_data = len(l)//n_split + (i < len(l)%n_split)
+		yield l[prev_ptr:(prev_ptr + n_data)]
+		prev_ptr += n_data
+
 def run_mr(mapper_script, reducer_script, input, output, extra_files = []):
 	input = input.strip("/")
 	output = output.strip("/")
