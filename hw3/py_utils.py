@@ -21,11 +21,11 @@ def run_mr(mapper_script, reducer_script, input, output, extra_files = []):
 	input = input.strip("/")
 	output = output.strip("/")
 
-	subprocess.check_call(["./bin/hdfs", "dfs", "-rmr", "-skipTrash", "/" + input, "/mr_output"])
-	subprocess.check_call(["./bin/hadoop", "fs", "-copyFromLocal", input, "/"])
+	subprocess.check_call(["hdfs", "dfs", "-rmr", "-skipTrash", "./" + input, "./mr_output"])
+	subprocess.check_call(["hadoop", "fs", "-copyFromLocal", input, "./"])
 
 	cmd = [
-			"./bin/hadoop", "jar", "./share/hadoop/tools/lib/hadoop-streaming-2.7.5.jar", 
+			"hadoop", "jar", "/usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar", 
 			"-file", mapper_script, 
 			"-file", reducer_script
 		]
@@ -37,13 +37,13 @@ def run_mr(mapper_script, reducer_script, input, output, extra_files = []):
 	cmd = cmd + [
 		"-mapper", mapper_script,
 		"-reducer", reducer_script,
-		"-input", "/" + input,
-		"-output", "/mr_output"
+		"-input", "./" + input,
+		"-output", "./mr_output"
 	]
 
 	subprocess.check_call(cmd)
 
-	subprocess.check_call(["./bin/hadoop", "fs", "-copyToLocal", "/mr_output/"+output, output])
+	subprocess.check_call(["./bin/hadoop", "fs", "-copyToLocal", "./mr_output/", output])
 
 
 def run_local(mapper_script, reducer_script, input, output):

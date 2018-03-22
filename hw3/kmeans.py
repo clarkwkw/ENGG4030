@@ -35,7 +35,7 @@ def q1a(kernel, n_iter = 15, train_lbl = None, train_img = None, **kwargs):
 				extra_files = ["mr_utils.py", mr_utils.CLUSTERS_DIR]
 			)
 
-def q1b(vote_proportion, train_lbl = None, train_img = None, test_lbl = None, test_img = None, **kwargs):
+def q1b(vote_proportion, test_lbl = None, test_img = None, **kwargs):
 	clusters = np.zeros((10, mr_utils.N_DIMENSION))
 	majority = np.zeros(10, dtype = np.int32)
 	cluster_members = {i: [] for i in range(10)}
@@ -49,12 +49,12 @@ def q1b(vote_proportion, train_lbl = None, train_img = None, test_lbl = None, te
 			idx = int(idx)
 			clusters[idx] = np.fromstring(cluster.strip("[]"), sep = ",")
 	
-	if train_lbl is not None and train_img is not None:
-		lbls, imgs = train_lbl, train_img
+	if test_lbl is not None and test_img is not None:
+		lbls, imgs = test_lbl, test_img
 	else:
-		lbls, imgs = mnist.read("training")
+		lbls, imgs = mnist.read("testing")
 	
-	# Calculate distance between each training images and each centroid
+	# Calculate distance between each images and each centroid
 	# Assign the training image to the nearest centroid
 	for i in range(imgs.shape[0]):
 		lbl, img = lbls[i], imgs[i]
@@ -62,18 +62,6 @@ def q1b(vote_proportion, train_lbl = None, train_img = None, test_lbl = None, te
 		dists = norm(clusters - img, axis = 1)
 		idx = np.argmin(dists)
 		cluster_members[idx].append((dists[idx], lbl))
-
-	if test_lbl is not None and test_img is not None:
-		tlbls, timgs = test_lbl, test_img
-	else:
-		tlbls, timgs = mnist.read("testing")
-
-	# Perform the same procedure on testing images
-	for i in range(timgs.shape[0]):
-		lbl, img = tlbls[i], timgs[i]
-
-		dists = norm(clusters - img, axis = 1)
-		idx = np.argmin(dists)
 		cluster_test_dist[idx, lbl] += 1
 
 	# Output summary statistics for each cluster
@@ -85,6 +73,7 @@ def q1b(vote_proportion, train_lbl = None, train_img = None, test_lbl = None, te
 			cluster_members_dist[idx, lbl] += 1
 		majority[idx] = np.argmax(cluster_members_dist[idx, :])
 		correct += cluster_test_dist[idx, majority[idx]]
+		
 		print("Cluster %d:"%idx)
 		print("\t#imgs in cluster: %d"%(len(cluster_members[idx])))
 		print("\t#imgs in consideration: %d"%(n_points))
@@ -112,7 +101,7 @@ def q1c(kernel, vote_proportion, n_iter, n_fold, **kwargs):
 		testing_lbl, testing_img = lbl[testing_split], img[testing_split]
 		print("Fold %d:"%(i + 1))
 		q1a(kernel, n_iter, training_lbl, training_img)
-		q1b(vote_proportion, training_lbl, training_img, testing_lbl, testing_img)
+		q1b(vote_proportion, testing_lbl, testing_img)
 
 CASES = {
 	"q1a": q1a,

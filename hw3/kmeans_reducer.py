@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/home/ubuntu/miniconda2/bin/python
 from __future__ import print_function
 import sys
 sys.path.append('./')
@@ -19,7 +19,6 @@ for line in mr_utils.get_line():
 	clusters[idx] = (clusters[idx] * prev_count + cluster * count)/(prev_count + count)
 	clusters_count[idx] += count
 
-clusters_mat = None
 for i in range(clusters.shape[0]):
 	if clusters_count[i] > 0:
 		print("%d\t%s\t%d"%(i, clusters[i].tolist(), clusters_count[i]))
