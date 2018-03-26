@@ -1,6 +1,12 @@
 import numpy as np
 import random
 import subprocess
+import os
+
+stdout_r, stderr_r = subprocess.STDOUT, subprocess.STDOUT
+def redirect_HD_output(stdout = subprocess.STDOUT, stderr = subprocess.STDOUT):
+	global stdout_r, stderr_r
+	stdout_r, stderr_r = stdout, stderr
 
 def initial_clusters(imgs, k = 10):
 	clusters = np.zeros((k, imgs.shape[1]))
@@ -18,15 +24,17 @@ def split_list(l, n_split):
 		prev_ptr += n_data
 
 def run_mr(mapper_script, reducer_script, input, output, extra_files = []):
+	global stdout_r, stderr_r
+
 	input = input.strip("/")
 	output = output.strip("/")
 
 	try:
-		subprocess.check_call(["hdfs", "dfs", "-rmr", "-skipTrash", "./" + input, "./mr_output"])
+		subprocess.check_call(["hdfs", "dfs", "-rmr", "-skipTrash", "./" + input, "./mr_output"], stdout = stdout_r, stderr = stderr_r)
 	except subprocess.CalledProcessError:
 		pass
 
-	subprocess.check_call(["hdfs", "dfs", "-copyFromLocal", input, "./"])
+	subprocess.check_call(["hdfs", "dfs", "-copyFromLocal", input, "./"], stdout = stdout_r, stderr = stderr_r)
 
 	cmd = [
 			"hadoop", "jar", "/usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar", 
@@ -45,15 +53,15 @@ def run_mr(mapper_script, reducer_script, input, output, extra_files = []):
 		"-output", "./mr_output"
 	]
 
-	subprocess.check_call(cmd)
+	subprocess.check_call(cmd, stdout = stdout_r, stderr = stderr_r)
 
 	try:
-		subprocess.check_call(["rm", "-f", output])
+		subprocess.check_call(["rm", "-f", output], stdout = stdout_r, stderr = stderr_r)
 	except subprocess.CalledProcessError:
 		pass
 
-	subprocess.check_call(["hdfs", "dfs", "-copyToLocal", "./mr_output/part-00000", output])
-
+	subprocess.check_call(["hdfs", "dfs", "-copyToLocal", "./mr_output/part-00000"], stdout = stdout_r, stderr = stderr_r)
+	FNULL.close()
 
 def run_local(mapper_script, reducer_script, input, output):
 	mapper_input = open(input, "r")

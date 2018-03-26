@@ -1,4 +1,4 @@
-import sys
+import sys, os
 import mnist
 import argparse
 import mr_utils
@@ -34,6 +34,8 @@ def q1a(kernel, n_iter = 15, train_lbl = None, train_img = None, **kwargs):
 				output = mr_utils.CLUSTERS_DIR,
 				extra_files = ["mr_utils.py", mr_utils.CLUSTERS_DIR]
 			)
+
+	print("Cluster output: %s"%mr_utils.CLUSTERS_DIR)
 
 def q1b(vote_proportion, test_lbl = None, test_img = None, **kwargs):
 	clusters = np.zeros((10, mr_utils.N_DIMENSION))
@@ -84,6 +86,9 @@ def q1b(vote_proportion, test_lbl = None, test_img = None, **kwargs):
 	print("overall: %.2f%%"%(100.0*correct/cluster_test_dist.sum()))
 
 def q1c(kernel, vote_proportion, n_iter, n_fold, **kwargs):
+	FNULL = open(os.devnull, "w")
+	py_utils.runredirect_HD_output(FNULL, FNULL)
+	
 	lbl1, img1 = mnist.read("training")
 	lbl2, img2 = mnist.read("testing")
 	lbl = np.concatenate((lbl1, lbl2), axis = 0)
