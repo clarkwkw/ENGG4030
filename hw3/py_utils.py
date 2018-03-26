@@ -25,7 +25,6 @@ def split_list(l, n_split):
 
 def run_mr(mapper_script, reducer_script, input, output, extra_files = []):
 	global stdout_r, stderr_r
-
 	input = input.strip("/")
 	output = output.strip("/")
 
@@ -61,7 +60,6 @@ def run_mr(mapper_script, reducer_script, input, output, extra_files = []):
 		pass
 
 	subprocess.check_call(["hdfs", "dfs", "-copyToLocal", "./mr_output/part-00000"], stdout = stdout_r, stderr = stderr_r)
-	FNULL.close()
 
 def run_local(mapper_script, reducer_script, input, output):
 	mapper_input = open(input, "r")
