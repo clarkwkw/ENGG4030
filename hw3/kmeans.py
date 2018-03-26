@@ -87,7 +87,7 @@ def q1b(vote_proportion, test_lbl = None, test_img = None, **kwargs):
 
 def q1c(kernel, vote_proportion, n_iter, n_fold, **kwargs):
 	FNULL = open(os.devnull, "w")
-	py_utils.runredirect_HD_output(FNULL, FNULL)
+	py_utils.redirect_HD_output(FNULL, FNULL)
 	
 	lbl1, img1 = mnist.read("training")
 	lbl2, img2 = mnist.read("testing")
