@@ -1,4 +1,3 @@
-#!/home/ubuntu/miniconda2/bin/python
 from __future__ import print_function
 import sys
 sys.path.append('./')
