@@ -3,8 +3,8 @@ import random
 import subprocess
 import os
 
-stdout_r, stderr_r = subprocess.STDOUT, subprocess.STDOUT
-def redirect_HD_output(stdout = subprocess.STDOUT, stderr = subprocess.STDOUT):
+stdout_r, stderr_r = None, None
+def redirect_HD_output(stdout = None, stderr = None):
 	global stdout_r, stderr_r
 	stdout_r, stderr_r = stdout, stderr
 
