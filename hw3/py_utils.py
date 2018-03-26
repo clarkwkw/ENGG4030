@@ -47,7 +47,7 @@ def run_mr(mapper_script, reducer_script, input, output, extra_files = []):
 
 	subprocess.check_call(cmd)
 
-	subprocess.check_call(["./bin/hadoop", "fs", "-copyToLocal", "./mr_output/part-00000", output])
+	subprocess.check_call(["hdfs", "dfs", "-copyToLocal", "./mr_output/part-00000", output])
 
 
 def run_local(mapper_script, reducer_script, input, output):
