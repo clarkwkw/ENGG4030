@@ -47,6 +47,11 @@ def run_mr(mapper_script, reducer_script, input, output, extra_files = []):
 
 	subprocess.check_call(cmd)
 
+	try:
+		subprocess.check_call(["rm", "-f", output])
+	except subprocess.CalledProcessError:
+		pass
+
 	subprocess.check_call(["hdfs", "dfs", "-copyToLocal", "./mr_output/part-00000", output])
 
 
