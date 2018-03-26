@@ -25,7 +25,7 @@ def run_mr(mapper_script, reducer_script, input, output, extra_files = []):
 		subprocess.check_call(["hdfs", "dfs", "-rmr", "-skipTrash", "./" + input, "./mr_output"])
 	except subprocess.CalledProcessError:
 		pass
-		
+
 	subprocess.check_call(["hdfs", "dfs", "-copyFromLocal", input, "./"])
 
 	cmd = [
@@ -35,7 +35,7 @@ def run_mr(mapper_script, reducer_script, input, output, extra_files = []):
 		]
 
 	for file in extra_files:
-		cmd.append(["-file"])
+		cmd.append("-file")
 		cmd.append(file)
 
 	cmd = cmd + [
