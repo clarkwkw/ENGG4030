@@ -59,7 +59,7 @@ def run_mr(mapper_script, reducer_script, input, output, extra_files = []):
 	except subprocess.CalledProcessError:
 		pass
 
-	subprocess.check_call(["hdfs", "dfs", "-copyToLocal", "./mr_output/part-00000"], stdout = stdout_r, stderr = stderr_r)
+	subprocess.check_call(["hdfs", "dfs", "-copyToLocal", "./mr_output/part-00000", output], stdout = stdout_r, stderr = stderr_r)
 
 def run_local(mapper_script, reducer_script, input, output):
 	mapper_input = open(input, "r")
