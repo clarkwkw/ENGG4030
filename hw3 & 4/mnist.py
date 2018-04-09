@@ -1,6 +1,7 @@
 import os
 import struct
 import numpy as np
+import math
 
 """
 Adopted from: https://gist.github.com/akesling/5358964 (GPL licensed)
@@ -51,16 +52,27 @@ def to_txt(collection, filename, format = "vect"):
             count += 1
     f.close()
 
-def show(image):
+def save_img(images, filename):
     """
     Render a given numpy.uint8 2D array of pixel data.
     """
     from matplotlib import pyplot
     import matplotlib as mpl
     fig = pyplot.figure()
-    ax = fig.add_subplot(1,1,1)
-    imgplot = ax.imshow(image, cmap=mpl.cm.Greys)
-    imgplot.set_interpolation('nearest')
-    ax.xaxis.set_ticks_position('top')
-    ax.yaxis.set_ticks_position('left')
-    pyplot.show()
+    images = images.reshape((-1, 28, 28))
+    n_row, n_col = int(math.sqrt(images.shape[0])), int(math.sqrt(images.shape[0]))
+    if images.shape[0] > n_row * n_col:
+    	n_row += 1
+
+    for i in range(images.shape[0]):
+	    ax = fig.add_subplot(n_row, n_col, i + 1)
+	    imgplot = ax.imshow(images[i], cmap=mpl.cm.Greys)
+	    ax.set_xticklabels([])
+	    ax.set_yticklabels([])
+	    #imgplot.set_interpolation('nearest')
+	    #ax.xaxis.set_ticks_position('top')
+	    #ax.yaxis.set_ticks_position('left')
+
+    fig.savefig(filename)
+    pyplot.clf()
+    pyplot.close(fig)
